@@ -24,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('post.update', $post->id) }}" method="POST">
+                    <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         
@@ -58,6 +58,58 @@
                                     <div class="form-text">
                                         <i class="fas fa-info-circle me-1"></i>
                                         Gunakan format HTML untuk styling teks (bold, italic, dll.)
+                                    </div>
+                                </div>
+
+                                <!-- Foto yang Sudah Ada -->
+                                @if($post->galeries && $post->galeries->count() > 0 && $post->galeries->first()->fotos->count() > 0)
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">
+                                        <i class="fas fa-images me-1"></i>
+                                        Foto yang Sudah Ada
+                                    </label>
+                                    <div class="row g-2">
+                                        @foreach($post->galeries->first()->fotos as $foto)
+                                        <div class="col-md-3 col-sm-4 col-6">
+                                            <div class="preview-image-container">
+                                                <img src="{{ \App\Helpers\ImageHelper::getImageUrl($foto->file) }}" 
+                                                     class="preview-image" 
+                                                     alt="{{ $foto->judul }}">
+                                                <div class="text-center mt-1">
+                                                    <small class="text-muted">{{ $foto->judul }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endif
+
+                                <!-- Upload Foto Baru -->
+                                <div class="mb-3">
+                                    <label for="fotos" class="form-label">
+                                        <i class="fas fa-images me-1"></i>
+                                        Tambah Foto Baru (Opsional)
+                                    </label>
+                                    <input type="file" 
+                                           class="form-control @error('fotos.*') is-invalid @enderror" 
+                                           id="fotos" 
+                                           name="fotos[]" 
+                                           accept="image/*" 
+                                           multiple
+                                           onchange="previewImages(event)">
+                                    @error('fotos.*')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Maksimal 10 foto | Format: JPG, PNG | Ukuran maksimal: 20MB per file
+                                    </div>
+                                    
+                                    <!-- Preview Container -->
+                                    <div id="imagePreview" class="mt-3" style="display: none;">
+                                        <label class="form-label fw-bold">Preview Foto Baru:</label>
+                                        <div class="row g-2" id="previewContainer"></div>
                                     </div>
                                 </div>
                             </div>
@@ -110,6 +162,22 @@
                                         <option value="Draft" {{ old('status', $post->status) == 'Draft' ? 'selected' : '' }}>Draft</option>
                                     </select>
                                     @error('status')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tanggal_jadwal" class="form-label">Tanggal Jadwal (Opsional)</label>
+                                    <input type="date" 
+                                           class="form-control @error('tanggal_jadwal') is-invalid @enderror" 
+                                           id="tanggal_jadwal" 
+                                           name="tanggal_jadwal" 
+                                           value="{{ old('tanggal_jadwal', $post->tanggal_jadwal) }}">
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Isi jika ini adalah berita tentang kegiatan yang akan datang
+                                    </div>
+                                    @error('tanggal_jadwal')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -170,5 +238,57 @@ textarea {
 .card.bg-light {
     border: 1px solid #e9ecef;
 }
+
+.preview-image-container {
+    position: relative;
+}
+
+.preview-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e5e7eb;
+}
 </style>
+
+<script>
+function previewImages(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('previewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    
+    if (files.length > 0) {
+        previewContainer.innerHTML = '';
+        imagePreview.style.display = 'block';
+        
+        for (let i = 0; i < Math.min(files.length, 10); i++) {
+            const file = files[i];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const col = document.createElement('div');
+                col.className = 'col-md-3 col-sm-4 col-6';
+                col.innerHTML = `
+                    <div class="preview-image-container">
+                        <img src="${e.target.result}" class="preview-image" alt="Preview ${i + 1}">
+                        <div class="text-center mt-2">
+                            <small class="text-muted">Foto Baru ${i + 1}</small>
+                        </div>
+                    </div>
+                `;
+                previewContainer.appendChild(col);
+            };
+            
+            reader.readAsDataURL(file);
+        }
+        
+        if (files.length > 10) {
+            alert('Maksimal 10 foto. Hanya 10 foto pertama yang akan diupload.');
+        }
+    } else {
+        imagePreview.style.display = 'none';
+    }
+}
+</script>
 @endsection

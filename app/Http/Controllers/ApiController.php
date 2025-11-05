@@ -942,9 +942,12 @@ class ApiController extends Controller
             $reportData = $galeries->map(function($galery) {
                 $fotoIds = $galery->fotos->pluck('id');
                 
+                // Prioritize galery's own title, then post title, then fallback
+                $title = $galery->judul ?? ($galery->post->judul ?? 'Tanpa Judul');
+                
                 return [
                     'id' => $galery->id,
-                    'title' => $galery->post->judul ?? 'Tanpa Judul',
+                    'title' => $title,
                     'category' => $galery->category ?? 'umum',
                     'photos_count' => $galery->fotos->count(),
                     'likes_count' => PhotoInteraction::whereIn('foto_id', $fotoIds)->where('type', 'like')->count(),

@@ -40,6 +40,38 @@
             background: #ffffff;
             min-height: 100vh;
             padding-top: 80px; /* Space for fixed navbar */
+            position: relative;
+        }
+        
+        /* Global Background Blur - Full Page */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('{{ asset("images/upacara-full.jpg.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: blur(10px) brightness(0.85);
+            -webkit-filter: blur(10px) brightness(0.85);
+            transform: scale(1.1);
+            z-index: -2;
+        }
+        
+        /* Global Dark Overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         .navbar {
@@ -327,87 +359,6 @@
             color: var(--primary-color);
         }
 
-        /* Photo Overlay Jurusan Cards Styling */
-        .jurusan-photo-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            height: 100%;
-        }
-
-        .jurusan-photo-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            height: 100%;
-            position: relative;
-        }
-
-        .jurusan-photo-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        .jurusan-photo-container {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-            border-radius: 15px;
-        }
-
-        .jurusan-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
-            filter: none;
-        }
-
-        .jurusan-photo-card:hover .jurusan-photo {
-            transform: scale(1.05);
-            filter: none;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-
-        .jurusan-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-
-        .jurusan-photo-card:hover .jurusan-overlay {
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .jurusan-photo-title {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 0;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            transition: transform 0.3s ease;
-        }
-
-        .jurusan-photo-card:hover .jurusan-photo-title {
-            transform: scale(1.1);
-        }
-
         /* Modern Minimalist Sambutan Styling */
         .sambutan-modern-container {
             max-width: 100%;
@@ -664,90 +615,7 @@
             }
         }
 
-
-        /* Profil Sekolah Cards Styling */
-        .profil-cards-container {
-            margin-top: 3rem;
-            width: 100%;
-        }
-
-        .profil-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            height: 100%;
-        }
-
-        .profil-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            height: 100%;
-            border: 2px solid transparent;
-            backdrop-filter: blur(10px);
-        }
-
-        .profil-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.98);
-        }
-
-        .profil-card-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .profil-card:hover .profil-card-icon {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
-        }
-
-        .profil-card-icon i {
-            font-size: 2rem;
-            color: white;
-        }
-
-        .profil-card-title {
-            color: #1e40af;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .profil-card:hover .profil-card-title {
-            color: #1e3a8a;
-        }
-
-        .profil-card-description {
-            color: #374151;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin: 0;
-            transition: color 0.3s ease;
-        }
-
-        .profil-card:hover .profil-card-description {
-            color: #1f2937;
-        }
-
-
-
-        
-
-                 /* Responsive untuk mobile */
+        /* Responsive untuk mobile */
                  @media (max-width: 768px) {
             .hero-content {
                 padding: 0 15px;
@@ -877,10 +745,73 @@
             transition-delay: 0.5s;
         }
 
-        /* YouTube Video Section Styles */
+        /* YouTube Video Section Styles - White Background */
         .youtube-section {
             position: relative;
-            overflow: hidden;
+            min-height: 600px;
+            background: transparent;
+        }
+        
+        /* YouTube Section - White Overlay */
+        .youtube-white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* YouTube Section - Dark Text for White Background */
+        .youtube-section-white h2,
+        .youtube-section-white h3,
+        .youtube-section-white p,
+        .youtube-section-white .video-content h3,
+        .youtube-section-white .video-content p {
+            color: #1f2937 !important;
+            text-shadow: none !important;
+        }
+        
+        .youtube-section-white .feature-item {
+            color: #1f2937 !important;
+        }
+        
+        /* Section backgrounds removed - using global background */
+        .section-background {
+            display: none;
+        }
+        
+        .section-overlay {
+            display: none;
+        }
+        
+        /* Gallery and News backgrounds removed - using global background */
+        .gallery-section-background,
+        .news-section-background {
+            display: none;
+        }
+        
+        .gallery-section-overlay,
+        .news-section-overlay {
+            display: none;
+        }
+        
+        /* Gallery Section - Dark Overlay to differentiate */
+        .gallery-section-dark {
+            position: relative;
+        }
+        
+        .gallery-dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .video-container {
@@ -930,16 +861,18 @@
         .video-title {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #1e40af;
+            color: #ffffff;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .video-description {
             font-size: 1.1rem;
-            color: #4b5563;
+            color: #ffffff;
             line-height: 1.6;
             margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .video-features {
@@ -953,15 +886,17 @@
             align-items: center;
             gap: 1rem;
             padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .feature-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 1);
         }
 
         .feature-item i {
@@ -1539,12 +1474,120 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
             height: 100%;
-            padding: 2rem;
+            display: flex;
+            flex-direction: column;
         }
 
         .news-card-modern:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* News Image */
+        .news-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card-modern:hover .news-image img {
+            transform: scale(1.1);
+        }
+
+        .news-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+        }
+
+        /* Event Date Badge */
+        .event-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 0.5s ease;
+        }
+
+        .event-badge-upcoming {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.95), rgba(22, 163, 74, 0.95));
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .event-badge-today {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(220, 38, 38, 0.95));
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .event-badge-past {
+            background: linear-gradient(135deg, rgba(107, 114, 128, 0.95), rgba(75, 85, 99, 0.95));
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+            }
+        }
+
+        .news-image-placeholder {
+            background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placeholder-content {
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        .placeholder-content i {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .placeholder-content span {
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .news-header {
@@ -1563,7 +1606,8 @@
         }
 
         .news-content {
-            height: 100%;
+            padding: 2rem;
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
@@ -1943,6 +1987,36 @@
         .berita-section {
             z-index: 1 !important;
             position: relative;
+        }
+        
+        /* News Section - White Overlay */
+        .news-white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* News Section - Dark Text for White Background */
+        .news-section-white .section-title,
+        .news-section-white h2,
+        .news-section-white h3,
+        .news-section-white h5,
+        .news-section-white p,
+        .news-section-white .card-title,
+        .news-section-white .card-text {
+            color: #1f2937 !important;
+            text-shadow: none !important;
+        }
+        
+        /* Gallery section title - white color for dark overlay */
+        #gallery .section-title {
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Fullscreen Image Viewer - Modern Light Blur Style */
@@ -2384,68 +2458,12 @@
         </div>
     </section>
 
-    <!-- Majors Section - Photo Overlay Layout -->
-    <section id="majors" class="py-5 scroll-animate" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6" id="pplg">
-                    <a href="{{ route('jurusan.pplg') }}" class="jurusan-photo-card-link">
-                        <div class="jurusan-photo-card scroll-animate delay-2">
-                            <div class="jurusan-photo-container">
-                                <img src="{{ asset('images/jurusan/pplg-logo.png') }}" alt="PPLG" class="jurusan-photo">
-                                <div class="jurusan-overlay">
-                                    <h4 class="jurusan-photo-title">PPLG</h4>
-                        </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                
-                <div class="col-lg-3 col-md-6" id="tjkt">
-                    <a href="{{ route('jurusan.tjkt') }}" class="jurusan-photo-card-link">
-                        <div class="jurusan-photo-card scroll-animate delay-3">
-                            <div class="jurusan-photo-container">
-                                <img src="{{ asset('images/jurusan/tjkt-logo.jpg') }}" alt="TJKT" class="jurusan-photo">
-                                <div class="jurusan-overlay">
-                                    <h4 class="jurusan-photo-title">TJKT</h4>
-                        </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                
-                <div class="col-lg-3 col-md-6" id="to">
-                    <a href="{{ route('jurusan.to') }}" class="jurusan-photo-card-link">
-                        <div class="jurusan-photo-card scroll-animate delay-4">
-                            <div class="jurusan-photo-container">
-                                <img src="{{ asset('images/jurusan/to-logo.jpg') }}" alt="TO" class="jurusan-photo">
-                                <div class="jurusan-overlay">
-                                    <h4 class="jurusan-photo-title">TO</h4>
-                        </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                
-                <div class="col-lg-3 col-md-6" id="tpfl">
-                    <a href="{{ route('jurusan.tpfl') }}" class="jurusan-photo-card-link">
-                        <div class="jurusan-photo-card scroll-animate delay-5">
-                            <div class="jurusan-photo-container">
-                                <img src="{{ asset('images/jurusan/tpfl-logo.jpg') }}" alt="TPFL" class="jurusan-photo">
-                                <div class="jurusan-overlay">
-                                    <h4 class="jurusan-photo-title">TPFL</h4>
-                        </div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- YouTube Video Section -->
-    <section class="youtube-section py-5" style="background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);">
-        <div class="container">
+    <!-- YouTube Video Section with White Background -->
+    <section class="youtube-section py-5 position-relative youtube-section-white" style="overflow: hidden;">
+        <!-- White Overlay -->
+        <div class="youtube-white-overlay"></div>
+        
+        <div class="container position-relative" style="z-index: 2;">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="video-container scroll-slide-left">
@@ -2462,8 +2480,8 @@
                     </div>
                 <div class="col-lg-6">
                     <div class="video-text scroll-slide-right">
-                        <h2 class="video-title">SMK Pusat Keunggulan</h2>
-                        <p class="video-description">
+                        <h2 class="video-title text-white">SMK Pusat Keunggulan</h2>
+                        <p class="video-description text-white">
                             SMK Negeri 4 Kota Bogor sebagai Pusat Keunggulan yang berkomitmen 
                             memberikan pendidikan berkualitas tinggi dan menghasilkan lulusan 
                             yang siap bersaing di era digital.
@@ -2488,42 +2506,12 @@
         </div>
     </section>
 
-    <!-- Profil Sekolah Section -->
-    <section id="profil" class="py-5 scroll-animate" style="background: white;">
-        <div class="container">
-            <h2 class="section-title scroll-animate delay-1">Profil Sekolah</h2>
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a href="{{ route('profil.visi-misi') }}" class="profil-card-link">
-                        <div class="profil-card scroll-animate delay-2">
-                            <div class="profil-card-icon">
-                                <i class="fas fa-bullseye"></i>
-                            </div>
-                            <h3 class="profil-card-title">Visi & Misi</h3>
-                            <p class="profil-card-description">Mengenal visi dan misi sekolah dalam membangun masa depan bangsa</p>
-                    </div>
-                    </a>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <a href="{{ route('profil.sejarah') }}" class="profil-card-link">
-                        <div class="profil-card scroll-animate delay-3">
-                            <div class="profil-card-icon">
-                                <i class="fas fa-history"></i>
-                        </div>
-                            <h3 class="profil-card-title">Sejarah</h3>
-                            <p class="profil-card-description">Perjalanan panjang sekolah dalam membangun pendidikan berkualitas</p>
-                        </div>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-5 scroll-animate" style="background: white; margin-bottom: 0; padding-bottom: 3rem;">
-        <div class="container">
+    <!-- Gallery Section - Using Global Background with Dark Overlay -->
+    <section id="gallery" class="py-5 scroll-animate position-relative gallery-section-dark" style="margin-bottom: 0; padding-bottom: 3rem; background: transparent;">
+        <!-- Dark Overlay for Gallery Section -->
+        <div class="gallery-dark-overlay"></div>
+        
+        <div class="container position-relative" style="z-index: 2;">
             <h2 class="section-title scroll-animate delay-1">Galeri Kegiatan Sekolah</h2>
             <div class="row g-3">
                 @forelse($galeries as $galery)
@@ -2649,14 +2637,62 @@
 
 
 
-    <!-- News Section -->
-    <section id="news" class="py-5 berita-section" style="position: relative; z-index: 1; margin-top: 5rem; padding-top: 4rem !important;">
-        <div class="container">
+    <!-- News Section - White Background -->
+    <section id="news" class="py-5 berita-section position-relative news-section-white" style="z-index: 1; margin-top: 0; padding-top: 4rem !important; background: transparent; min-height: 700px;">
+        <!-- White Overlay -->
+        <div class="news-white-overlay"></div>
+        
+        <div class="container position-relative" style="z-index: 2;">
             <h2 class="section-title">Berita Terbaru</h2>
             <div class="row g-4">
                 @forelse($latestPosts as $post)
                     <div class="col-lg-4 col-md-6">
                         <div class="news-card-modern">
+                            <!-- News Image -->
+                            @if($post->galeries && $post->galeries->count() > 0 && $post->galeries->first()->fotos->count() > 0)
+                                @php
+                                    $imageUrl = \App\Helpers\ImageHelper::getImageUrl($post->galeries->first()->fotos->first()->file);
+                                @endphp
+                                <div class="news-image">
+                                    <img src="{{ $imageUrl }}" alt="{{ $post->judul }}">
+                                    <div class="news-image-overlay"></div>
+                                    
+                                    <!-- Event Date Badge -->
+                                    @if($post->tanggal_jadwal)
+                                        @php
+                                            $eventDate = \Carbon\Carbon::parse($post->tanggal_jadwal);
+                                            $isUpcoming = $eventDate->isFuture();
+                                            $isPast = $eventDate->isPast();
+                                            $isToday = $eventDate->isToday();
+                                        @endphp
+                                        
+                                        @if($isUpcoming)
+                                            <div class="event-badge event-badge-upcoming">
+                                                <i class="fas fa-calendar-check me-1"></i>
+                                                Akan Datang: {{ $eventDate->locale('id')->format('d M Y') }}
+                                            </div>
+                                        @elseif($isToday)
+                                            <div class="event-badge event-badge-today">
+                                                <i class="fas fa-calendar-day me-1"></i>
+                                                Hari Ini
+                                            </div>
+                                        @elseif($isPast)
+                                            <div class="event-badge event-badge-past">
+                                                <i class="fas fa-calendar-times me-1"></i>
+                                                {{ $eventDate->locale('id')->format('d M Y') }}
+                                            </div>
+                                        @endif
+                                    @endif
+                                </div>
+                            @else
+                                <div class="news-image news-image-placeholder">
+                                    <div class="placeholder-content">
+                                        <i class="fas fa-newspaper"></i>
+                                        <span>Tidak ada gambar</span>
+                                    </div>
+                                </div>
+                            @endif
+                            
                             <div class="news-content">
                                 <div class="news-header">
                                     <div class="date-badge">
